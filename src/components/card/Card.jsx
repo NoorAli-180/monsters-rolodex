@@ -11,3 +11,8 @@ export const Card = (props) => {
         </div>
     )
 }
+
+Card.defaultProps = {
+    title: 'new title',
+    name: 'new name',
+}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.css';
 import { CardList } from './components/card-list/CardList.jsx';
+import { SearchBox } from './components/search-box/SearchBox.jsx';
 
 class App extends React.Component{
   constructor(){
@@ -11,6 +12,7 @@ class App extends React.Component{
     // / state property is present in Component class there for we call super(), constructor of parent class to get access to state property.
     this.state = {
       monsters: [],
+      searched: '',
     }
   }
 
@@ -21,9 +23,13 @@ class App extends React.Component{
   }
 
   render(){
+    const {monsters, searched} = this.state;
+    const filteredMonsters = monsters.filter((monster) => monster.name.toLowerCase().includes(searched.toLowerCase()));
+
     return(
       <div className="App">
-        <CardList monsters = {this.state.monsters} />
+        <SearchBox onChange = {(e) => this.setState({searched: e.target.value})}/>
+        <CardList monsters = {filteredMonsters} />
       </div>
     )
   }
